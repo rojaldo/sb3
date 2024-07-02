@@ -20,9 +20,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert alert-primary" role="alert">
+                    <div class="alert alert-primary" role="alert" th:if="${correct}">
                         <strong th:text="${num1} + ${op} + ${num2} + ' = ' + ${res}" />
                     </div>
+
+                    <div class="alert alert-danger" role="alert" th:if="!${correct}">
+                        <strong > Invalid operation </strong>
+                    </div>
+
 
                 </div>
             </div>
