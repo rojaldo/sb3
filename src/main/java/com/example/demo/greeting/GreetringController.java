@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.greeting;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +11,11 @@ public class GreetringController {
 
     @GetMapping("/greeting")
     public String greeting(
-        @RequestParam(name="msg", required=false, defaultValue="World") String message,
+        @RequestParam(name="msg", required=false, defaultValue="hola") String message,
         @RequestParam(name="age", required=false, defaultValue="30") int age,
         Model view) {
-        System.out.println("Message: " + message);
         view.addAttribute("my_message", message);
         return "greeting";
     }
-    
-    
-    
-    
-    
-    
     
 }
