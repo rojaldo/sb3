@@ -25,7 +25,6 @@ public class CalculatorController {
                     view.addAttribute("num2", this.calculatorService.getSecondNumber());
                     view.addAttribute("op", this.calculatorService.getOperation());
                     view.addAttribute("correct", evalStr.equals("ERROR") ? false : true);
-                    return "calculator";
                     
                 }else if (eval.equals("") ) {
                     view.addAttribute("res", 0);
@@ -33,7 +32,6 @@ public class CalculatorController {
                     view.addAttribute("num2", 0);
                     view.addAttribute("op", "");
                     view.addAttribute("correct", true);
-                    return "calculator";
                 }
         float result = this.calculatorService.calculate(op1, op2, operation);
         view.addAttribute("res", result);
