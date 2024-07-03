@@ -31,13 +31,13 @@ public class UserService {
         return UserDto.builder().name(res.getName()).email(res.getEmail()).id(res.getId()).build();
     }
 
-    public boolean deleteUser(Long id){
+    public UserDto deleteUser(Long id){
         Optional<UserEntity> userEntity = userRepository.findById(id);
         if (!userEntity.isPresent()) {
-            return false;
+            return null;
         }
         userRepository.deleteById(id);
-        return true;
+        return UserDto.builder().name(userEntity.get().getName()).email(userEntity.get().getEmail()).id(userEntity.get().getId()).build();
     }
 
     public boolean updateUser(Long id, UserDto userDto){
