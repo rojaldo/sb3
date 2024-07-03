@@ -40,15 +40,15 @@ public class UserService {
         return UserDto.builder().name(userEntity.get().getName()).email(userEntity.get().getEmail()).id(userEntity.get().getId()).build();
     }
 
-    public boolean updateUser(Long id, UserDto userDto){
+    public UserDto updateUser(Long id, UserDto userDto){
         Optional<UserEntity> userEntity = userRepository.findById(id);
-        if (!userEntity.isPresent()) {
-            return false;
+        if (!userEntity.isPresent() || !userEntity.get().getEmail().equals(userDto.getEmail())) {
+            return null;
         }
         UserEntity user = userEntity.get();
-        user.setEmail(userDto.getEmail());
+        user.setName(userDto.getName());
         userRepository.save(user);
-        return true;
+        return UserDto.builder().name(user.getName()).email(user.getEmail()).id(user.getId()).build();
     }
 
     public void initUsers(){

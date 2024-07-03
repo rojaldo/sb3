@@ -44,6 +44,15 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
+    @RequestMapping(path = "/users/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<IResponseDto> updateUser(@PathVariable Long id, @RequestBody @Validated UserDto userDto) {
+        UserDto result = userService.updateUser(id, userDto);
+        if (result == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorUserDto.builder().message("User not found or email can't be updated").query(userDto).build());
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     @DeleteMapping(path = "/users/{id}")
     public ResponseEntity<IResponseDto> deleteUser(@PathVariable Long id) {
         UserDto result = userService.deleteUser(id);
