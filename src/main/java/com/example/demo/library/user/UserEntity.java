@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package com.example.demo.library.user;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Value;
