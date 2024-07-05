@@ -1,5 +1,6 @@
 package com.example.demo.library.books;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,8 +9,8 @@ public interface BooksRespository extends JpaRepository<BookEntity, Long> {
 
     BookEntity findById(long id);
     Optional<BookEntity> findByIsbn(String isbn);
-    BookEntity findByTitle(String title);
-    BookEntity findByAuthor(String author);
+    List<BookEntity> findByTitleContainingIgnoreCase(String title);
+    List<BookEntity> findByAuthorContainingIgnoreCase(String author);
     BookEntity findByAuthorAndTitle(String author, String title);
 
 }

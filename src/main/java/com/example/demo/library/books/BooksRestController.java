@@ -26,8 +26,8 @@ public class BooksRestController {
     BooksService booksService;
 
     @GetMapping("/books")
-    public ResponseEntity<Iterable<BookDto>> getBooks(BookDto author) {
-        return ResponseEntity.ok().body(this.booksService.getAllBooks());
+    public ResponseEntity<Iterable<BookDto>> getBooks(BookDto book) {
+        return ResponseEntity.ok().body(this.booksService.getAllBooks(book));
     }
 
     @PostMapping("/books")

@@ -51,8 +51,15 @@ public class BooksService {
         return this.booksRespository.findById(id);
     }
 
-    public Iterable<BookDto> getAllBooks() {
+    public Iterable<BookDto> getAllBooks(BookDto book) {
         Iterable<BookEntity> bookEntities = this.booksRespository.findAll();
+        if (book.getTitle() == null && book.getAuthor() == null) {
+            
+        }else if (book.getTitle() != null && book.getAuthor() == null) {
+            bookEntities = this.booksRespository.findByTitleContainingIgnoreCase(book.getTitle());
+        }else if (book.getTitle() == null && book.getAuthor() != null) {
+            bookEntities = this.booksRespository.findByAuthorContainingIgnoreCase(book.getAuthor());
+        }
         return this.convertBookEntitiesToBookDtos(bookEntities);
     }
 
