@@ -13,5 +13,6 @@ public class ErrorUserDto implements IResponseDto {
     
     private String message;
     private UserDto query;
+
        
 }

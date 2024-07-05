@@ -1,9 +1,10 @@
 # Getting Started
 
 ## Documentation
-
+Spring (Boot): 
 https://docs.google.com/presentation/d/1T3CswEdBDMw9o728fTWQHnnBEWnGD6b3UqgbUoeb0wU/edit?usp=sharing
 
+Rest APIs:
 https://docs.google.com/presentation/d/1W-Y-E7hdAlKnaVKMoqnZy3i71fCZ5f51icSvqDb8Mkc/edit?usp=sharing
 
 ### podman commands

@@ -18,7 +18,9 @@ tags:
   - name: beers
     description: Beers
   - name: books
-    description: Books
+    description: Books from library
+  - name: users
+    description: Library users
 paths:
   /beers:
     get:
@@ -61,6 +63,129 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error400'
+  /library/users:
+    get:
+      summary: Get users
+      description: Get users from library with optional filters by name and email
+      operationId: getUsers
+      tags:
+        - "users"
+      parameters: 
+        - name: name
+          in: query
+          description: User name
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: User email
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+    post:
+      summary: Create user
+      description: Create user with name and email
+      operationId: createUser
+      tags:
+        - "users"
+      requestBody:
+        description: User object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Created user successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+  /library/users/{id}:
+    put:
+      description: Update user
+      operationId: updateUser
+      tags:
+        - "users"
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: User object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+    delete:
+      description: Delete user
+      operationId: deleteUser
+      tags:
+        - "users"
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
   /library/books:
     get:
       summary: Get books
@@ -219,6 +344,27 @@ components:
         ebc:
           type: number
           example: 20.0
+    UserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@email.com
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john.doe@email.com
     BookRequest:
       type: object
       properties:
